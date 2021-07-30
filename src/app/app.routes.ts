@@ -3,6 +3,8 @@ import { Route } from '@angular/router';
 import { ProductDetailComponent } from './core/components/product-detail/product-detail.component';
 import { ProductListComponent } from './core/components/product-list/product-list.component';
 
+import { VerifyComponent } from './account/components/verify/verify.component';
+
 export const routes: Route[] = [
     {
         path: 'category/:slug',
@@ -24,5 +26,9 @@ export const routes: Route[] = [
     {
         path: 'checkout',
         loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule),
+    },
+    {
+        path: 'verificar',
+        component: VerifyComponent,
     },
 ];
