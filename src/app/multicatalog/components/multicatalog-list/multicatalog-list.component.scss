@@ -1,0 +1,56 @@
+.MulticatalogList {
+  margin: 1rem;
+
+  &-list {
+    margin-top: 1rem;
+    display: flex;
+  }
+}
+
+.TiendaBox {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #CCC;
+  border-radius: 0.2rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  width: 300px;
+
+  &-nombre {
+    font-size: 1.3rem;
+  }
+
+  .label {
+    font-size: 1rem;
+    background-color: rgb(107, 190, 107);
+    color: white;
+    width: fit-content;
+    padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+    border-radius: 0.2rem;
+  }
+
+  &-header {
+    height: 150px;
+    border-bottom: 1px solid #CCC;
+    
+  }
+
+  &-body {
+    height: 200px;
+    padding: 1rem;
+  }
+
+  &:hover {
+
+    .TiendaBox-header {
+      background: #ded4ff;
+      transition: all .5s ease-out;
+    }
+
+    .TiendaBox-body {
+      background: #ded4ff;
+      transition: all .5s ease-out;
+    }
+  }
+}

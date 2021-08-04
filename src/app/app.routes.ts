@@ -1,3 +1,4 @@
+import { HomePageComponent } from './core/components/home-page/home-page.component';
 import { Route } from '@angular/router';
 
 import { ProductDetailComponent } from './core/components/product-detail/product-detail.component';
@@ -30,5 +31,9 @@ export const routes: Route[] = [
     {
         path: 'verificar',
         component: VerifyComponent,
+    },
+    {
+        path: 'tiendas',
+        loadChildren: () => import('./multicatalog/multicatalog.module').then(m => m.MulticatalogModule),
     },
 ];

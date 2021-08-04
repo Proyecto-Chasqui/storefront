@@ -128,27 +128,34 @@ export function apolloOptionsFactory(httpLink: HttpLink, platformId: any) {
         apiPort = process?.env?.SERVER_API_PORT ? +process.env.SERVER_API_PORT : apiPort;
         shopApiPath = process?.env?.SERVER_API_PATH || shopApiPath;
     }
-    const result = {
+    return {
         cache: apolloCache,
         link: ApolloLink.from([
             setContext(() => {
+                const headers = {};
+
+                const selectedChannelToken = localStorage.getItem('selectedChannelToken');
+                if(selectedChannelToken) {
+                    // @ts-ignore
+                    headers['vendure-token'] = selectedChannelToken;
+                }
+
                 if (!isServer) {
                     if (environment.tokenMethod === 'bearer') {
                         const authToken = localStorage.getItem('authToken');
                         if (authToken) {
-                            return {
-                                headers: {
-                                    authorization: `Bearer ${authToken}`,
-                                },
-                            };
+                            // @ts-ignore
+                            headers['authorization'] =  `Bearer ${authToken}`;
                         }
                     }
                 }
+                return {
+                    headers
+                };
             }),
             httpLink.create({
                 uri: `${apiHost}:${apiPort}/${shopApiPath}`,
                 withCredentials: true,
             })]),
     };
-    return result;
 }
