@@ -34,4 +34,9 @@ export class DataService {
             context: this.context,
         }).pipe(map(response => response.data as T));
     }
+
+    resetCache() {
+        // @ts-ignore
+        this.apollo.client.cache.reset();
+    }
 }
