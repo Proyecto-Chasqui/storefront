@@ -10,7 +10,7 @@ RUN yarn install
 
 COPY --chown=node:node . . 
 
-RUN yarn run build
+RUN yarn run build:ssr:docker
 
 # Stage 2 · SERVE
 FROM nginx:1.21.1-alpine
