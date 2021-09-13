@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
-    apiHost: 'http://localhost',
-    apiPort: 80,
+    apiHost: '',
+    apiPort: 0,
     shopApiPath: 'shop-api',
     baseHref: '/',
     tokenMethod: 'bearer',

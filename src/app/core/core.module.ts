@@ -1,3 +1,4 @@
+import { makeUri } from './../../environments/makeUri';
 import { APP_BASE_HREF, isPlatformServer } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, PLATFORM_ID } from '@angular/core';
@@ -123,10 +124,14 @@ export function apolloOptionsFactory(httpLink: HttpLink, platformId: any) {
     if (providedCacheState) {
         apolloCache.restore(providedCacheState);
     }
+    let uri;
     if (isServer) {
         apiHost = process?.env?.SERVER_API_HOST || apiHost;
         apiPort = process?.env?.SERVER_API_PORT ? +process.env.SERVER_API_PORT : apiPort;
         shopApiPath = process?.env?.SERVER_API_PATH || shopApiPath;
+        uri = `${apiHost}:${apiPort}/${shopApiPath}`;
+    } else {
+        uri = makeUri({apiHost, apiPort, shopApiPath})
     }
     return {
         cache: apolloCache,
@@ -154,7 +159,7 @@ export function apolloOptionsFactory(httpLink: HttpLink, platformId: any) {
                 };
             }),
             httpLink.create({
-                uri: `${apiHost}:${apiPort}/${shopApiPath}`,
+                uri: uri,
                 withCredentials: true,
             })]),
     };
